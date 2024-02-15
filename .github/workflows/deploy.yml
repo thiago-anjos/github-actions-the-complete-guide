@@ -10,7 +10,7 @@ jobs:
     env:
       MONGODB_CLUSTER_ADDRESS: cluster0.abcpc7o.mongodb.net
       MONGODB_USERNAME: thiago
-      MONGODB_PASSWORD: admin
+      MONGODB_PASSWORD: 2pg@AZmb$4tvFX2
       PORT: 8080
     environment: testing
     runs-on: ubuntu-latest
