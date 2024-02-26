@@ -30,12 +30,12 @@ jobs:
       - name: Run tests
         run: npm test
       - name: Output information
-        run: echo "username = ${{ env.MONGODB_USERNAME }}"
+        run: echo "username from env = ${{ env.MONGODB_USERNAME }}"
   deploy:
     needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Output information
         run: |
-          echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}"
-          echo "MONGODB_PASSWD: ${{ env.MONGODB_PASSWORD }}
+          echo "MONGODB_USERNAME from env: ${{ env.MONGODB_USERNAME }}"
+          echo "MONGODB_PASSWD from env: ${{ env.MONGODB_PASSWORD }}
