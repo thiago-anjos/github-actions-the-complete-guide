@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - section-6
+  workflow_dispatch:
 env:
   MONGODB_DB_NAME: gha-demo
 jobs:
