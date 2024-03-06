@@ -4,5 +4,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Output info
-        run: this is a piece of reusable code
+      - name: Get build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-files
+      - name: Output contents
+        run: ls
+      - name: Deploy
+        run: echo "Deploying... using reusable code"
