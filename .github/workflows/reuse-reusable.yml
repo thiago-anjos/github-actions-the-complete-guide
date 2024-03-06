@@ -70,6 +70,8 @@ jobs:
     uses: ./.github/workflows/reusable.yml
     with:
       artifact_name: dist-files
+    secrets:
+      some_secret: ${{ secrets.PETS_NAME }}
   report:
     needs: [test]
     if: failure()
