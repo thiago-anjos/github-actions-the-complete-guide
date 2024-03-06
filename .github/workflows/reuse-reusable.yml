@@ -71,7 +71,7 @@ jobs:
     with:
       artifact_name: dist-files
     secrets:
-      some_secret: ${{ secrets.PETS_NAME }}
+      PETS_NAME: ${{ secrets.PETS_NAME }}
   report:
     needs: [test]
     if: failure()
