@@ -28,3 +28,18 @@ jobs:
         run: |
           echo "${{ secrets.PETS_NAME }}"
           echo "Deploying... using reusable code"
+  debug_secret:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Secret Value
+        run: |
+          echo "Secret value: ${{ secrets.PETS_NAME }}"
+
+      - name: Write Secret Value to File
+        run: |
+          echo "${{ secrets.PETS_NAME }}" > secret_value.txt
+        # Write the secret value to a file named "secret_value.txt"
+
+      - name: Display File Contents
+        run: cat secret_value.txt
