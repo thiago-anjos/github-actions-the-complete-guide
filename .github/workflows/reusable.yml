@@ -6,12 +6,17 @@ on:
         description: The name of the artifact
         required: true
         type: string
+      environment:
+        description: The name of the environment
+        required: true
+        type: string
     secrets:
       PETS_NAME:
         required: true
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
     steps:
       - name: Get build artifacts
         uses: actions/download-artifact@v3

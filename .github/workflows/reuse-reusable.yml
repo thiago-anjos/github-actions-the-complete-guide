@@ -70,6 +70,7 @@ jobs:
     uses: ./.github/workflows/reusable.yml
     with:
       artifact_name: dist-files
+      environment: testing
     secrets:
       PETS_NAME: ${{ secrets.PETS_NAME }}
   report:
