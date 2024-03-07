@@ -73,6 +73,12 @@ jobs:
       environment: testing
     secrets:
       PETS_NAME: ${{ secrets.PETS_NAME }}
+  print-deploy-result:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: print deploy result
+        run: echo "${{ needs.deploy.outputs.result }}"
   report:
     needs: [test]
     if: failure()
