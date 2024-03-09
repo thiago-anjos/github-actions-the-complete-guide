@@ -12,9 +12,9 @@ jobs:
     container:
       image: node:16
     env:
-      MONGODB_CLUSTER_ADDRESS: cluster0.abcpc7o.mongodb.net
-      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
-      MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
+      MONGODB_CLUSTER_ADDRESS: mongodb
+      MONGODB_USERNAME: root
+      MONGODB_PASSWORD: example
       PORT: 8080
     services:
       mongodb:
