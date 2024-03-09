@@ -1,25 +1,50 @@
-name: Node.js with MongoDB Example
+name: Deployment Container
 on:
   push:
     branches:
       - section-8-docker
+  workflow_dispatch:
+env:
+  MONGODB_DB_NAME: gha-demo
 jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
+  test:
+    environment: testing
+    container:
+      image: node:16
+    env:
+      MONGODB_CONNECTION_PROTOCOL: mongodb
+      MONGODB_CLUSTER_ADDRESS: mongodb
+      MONGODB_USERNAME: root
+      MONGODB_PASSWORD: example
+      PORT: 8080
     services:
       mongodb:
         image: mongo
-        ports:
-          - 27017:27017
-        options: --name mongodb
+        env:
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_PASSWORD: example
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Cache dependencies
+        uses: actions/cache@v3
         with:
-          node-version: "14"
+          path: ~/.npm
+          key: npm-deps-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
-        run: npm install
-      - name: Start server
-        run: npm start
+        run: npm ci
+      - name: Run server
+        run: npm start & npx wait-on http://127.0.0.1:$PORT
+      - name: Run tests
+        run: npm test
+      - name: Output information
+        run: echo "username from env = ${{ env.MONGODB_USERNAME }}"
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output information
+        run: |
+          echo "MONGODB_USERNAME from env = ${{ env.MONGODB_USERNAME }}"
+          echo "MONGODB_PASSWD from env =  ${{ env.MONGODB_PASSWORD }}"
