@@ -2,7 +2,7 @@ name: Deployment Container
 on:
   push:
     branches:
-      - section-6
+      - section-8-docker
   workflow_dispatch:
 env:
   MONGODB_DB_NAME: gha-demo
